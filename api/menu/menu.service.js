@@ -44,6 +44,20 @@ module.exports = {
             }
         );
     },
+
+    getItemByItemType: (ItemType, callBack) => {
+        conn.query(
+            `select ItemName , ItemType, price , available_amount from menu where ItemType = ?`,
+            [ItemType],
+            (error, results, field) => {
+                if(error){
+                    return callBack(error)
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
     updateItem: (data, callBack) => {
         conn.query(
             `update menu set ItemType = ?, price=?,  available_amount=? where ItemName = ?`,
@@ -74,6 +88,5 @@ module.exports = {
         }
     );
     }, 
-
-   
+    
 };

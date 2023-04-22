@@ -2,6 +2,7 @@ const {
     createItem,
     getItems,
     getItemByItemName,
+    getItemByItemType,
     updateItem,
     deleteItem
 } = require("./menu.service");
@@ -27,6 +28,26 @@ module.exports = {
     getItemByItemName: (req, res) => {
     const ItemName = req.params.ItemName;
     getItemByItemName(ItemName, (err, results) =>  {
+        if(err){
+            console.log(err);
+            return;
+        }
+        if(!results){
+            return res.json({
+                success: 0,
+                message: "Record Not Found"
+            });
+        }
+        return res.json({
+            success: 1,
+            data: results
+        });
+    });
+   },
+
+   getItemByItemType: (req, res) => {
+    const ItemType = req.params.ItemType;
+    getItemByItemType(ItemType, (err, results) =>  {
         if(err){
             console.log(err);
             return;
