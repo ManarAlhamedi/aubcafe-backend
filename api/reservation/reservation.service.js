@@ -4,9 +4,8 @@ module.exports = {
     createReservation: (data, callBack) => {
         conn.query(
             
-            `insert into reservation(Reservation_ID , user_email,  dateOfReservation , timeOfReservation) values(?,?,?,?)`,
+            `insert into reservation( user_email,  dateOfReservation , timeOfReservation) values(?,?,?)`,
             [
-                data.Reservation_ID,
                 data.user_email,
                 data.dateOfReservation,
                 data.timeOfReservation
@@ -48,7 +47,7 @@ module.exports = {
    
     deleteReservation: (data, callBack) => {
         conn.query(
-        'delete from reservatoin where Reservation_ID = ?',
+        'delete from reservation where Reservation_ID = ?',
         [data.Reservation_ID],
         (error, results, fields) => {
             if(error){
@@ -59,5 +58,21 @@ module.exports = {
     );
     }, 
 
-   
+    createCart: (data, callBack) => {
+        conn.query(
+            
+            `insert into cart(ItemName ,Reservation_ID , Quantity ) values(?,?,?)`,
+            [
+                data.ItemName,
+                data.Reservation_ID, 
+                data.Quantity
+            ],
+            (error, results, fields) => {
+                if(error) {
+                    return callBack(error)
+                }
+                return callBack(null, results)
+            }
+        );
+    },
 };
