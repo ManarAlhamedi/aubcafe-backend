@@ -3,12 +3,13 @@ const conn = require("../../database");
 module.exports = {
     createItem: (data, callBack) => {
         conn.query(
-            `insert into menu(ItemName , ItemType,  price , available_amount) values(?,?,?,?)`,
+            `insert into menu(ItemName , ItemType,  price , available_amount, Description_) values(?,?,?,?,?)`,
             [
                 data.ItemName,
                 data.ItemType,
                 data.price,
-                data.available_amount
+                data.available_amount,
+                data.Description_
                 
             ],
             (error, results, fields) => {
@@ -21,7 +22,7 @@ module.exports = {
     },
     getItems: callBack => {
         conn.query(
-            `select ItemName, ItemType, price , available_amount from menu`,
+            `select ItemName, ItemType, price , available_amount, Description_ from menu`,
             [],
             (error, results, field) => {
                 if(error){
@@ -34,7 +35,7 @@ module.exports = {
 
     getItemByItemName: (ItemName, callBack) => {
         conn.query(
-            `select ItemName , ItemType, price , available_amount from menu where ItemName = ?`,
+            `select ItemName , ItemType, price , available_amount , Description_  from menu where ItemName = ?`,
             [ItemName],
             (error, results, field) => {
                 if(error){
@@ -47,7 +48,7 @@ module.exports = {
 
     getItemByItemType: (ItemType, callBack) => {
         conn.query(
-            `select ItemName , ItemType, price , available_amount from menu where ItemType = ?`,
+            `select ItemName , ItemType, price , available_amount, Description_ from menu where ItemType = ?`,
             [ItemType],
             (error, results, field) => {
                 if(error){
@@ -60,12 +61,13 @@ module.exports = {
 
     updateItem: (data, callBack) => {
         conn.query(
-            `update menu set ItemType = ?, price=?,  available_amount=? where ItemName = ?`,
+            `update menu set ItemType = ?, price=?,  available_amount=?, Description_ = ? where ItemName = ?`,
             [
                 data.ItemType,
                 data.price,
                 data.available_amount,
-                data.ItemName
+                data.ItemName,
+                data.Description_
             ],
             (error, results, fields) => {
                 if(error) {
