@@ -75,4 +75,21 @@ module.exports = {
             }
         );
     },
+
+    sendEmail: callBack => {
+        conn.query(
+            `select r.user_email,  u.first_name, r.dateOfReservation , r.timeOfReservation 
+             from reservation r, user u
+             where r.user_email = u.email`,
+             [],
+             (error, results, field) => {
+                if(error){
+                    return callBack(error)
+                }
+                return callBack(null, results);
+            }
+        );
+
+    }
+   
 };

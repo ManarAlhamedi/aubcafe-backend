@@ -13,3 +13,5 @@ app.use("/api/reservation" , reservationRouter);
 app.listen(process.env.APP_PORT, () =>{
     console.log("Server up and running on PORT: ", process.env.APP_PORT);
 });
+
+module.exports = app;
