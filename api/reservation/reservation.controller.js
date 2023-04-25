@@ -3,8 +3,7 @@ const {
     getReservation,
     getReservationByReservation_ID,
     deleteReservation,
-    createCart,
-    sendEmail
+    createCart
 } = require("./reservation.service");
 const nodemailer = require('nodemailer');
 
